@@ -1,0 +1,63 @@
+swagger: "2.0"
+info:
+  title: Adressbuch
+  description: dieses Adressbuch soll 1 bis n Kontakte speichern
+  version: 1.0.0
+  
+host: api.adressbuch.de
+basePath: /adressbuch
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json  
+  
+paths:
+  /kontakt:
+    post:
+      description: Fuegt einen neuen Kontakt zum Adressbuch hinzu
+      operationId: addKontakt
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Kontakte'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Kontakte'
+        500:
+          description: internalServerError    
+          
+definitions:
+  Kontakte:
+    type: object
+    properties:
+      kontakt:
+        type: array
+        items:
+          $ref: '#/definitions/Kontakt'
+  
+  Kontakt:
+    type: object
+    properties:
+      nachname:
+        type: string
+        example: "musternachname"
+      vorname:
+        type: string
+        example: "mustervorname"
+      email:
+        type: string
+        example: "muster@gmaill.com"
+                 
+        
+                  
+          
